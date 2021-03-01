@@ -23,17 +23,26 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(empty($_POST["name"])){
         $errName = "Name Is Required!";
     }else{
-       $name=valid($_POST["name"]); 
+       $name=valid($_POST["name"]);
+       if(!preg_match("/^[a-zA-Z-' ]*$/",$name)){
+            $errName = "Only letters and white space allowed";
+       } 
     }
     if(empty($_POST["age"])){
         $errAge = "Age is Required!";
     }else{
         $age=valid($_POST["age"]);
+        if(!preg_match("/0-9/",$age)){
+            $errAge = "Only letters and white space allowed";
+       }
     }
     if(empty($_POST["email"])){
         $errEmail = "Email is Required!";
     }else{
         $email=valid($_POST["email"]);
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $errEmail = "Invalid email format";
+        }
     }
     if(empty($_POST["website"])){
         $errWebsite = "Website site is Required!";
